@@ -1,0 +1,6 @@
+Влево - Left/A
+Вправо - Right/D
+Прыжок - Up/W
+Стрелять - Left Mouse
+Удар кулаком - Right Mouse
+Лезть по лестнице - Up/W
