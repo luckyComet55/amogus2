@@ -5,9 +5,9 @@
 #include <vector>
 #include <map>
 #include <iostream>
+
 using namespace sf;
 
-float ground_level=160;
 float width=1920, height=1000;
 
 std::string TileMap[25] = {

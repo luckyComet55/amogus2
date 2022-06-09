@@ -12,7 +12,13 @@ public:
 
     void update(float time) {
         x += dx*time;
-        for (int i = 0; i < (x + w)/40; ++i)
+        if (x < -12 || x > width) Health = 0;
+//        if (y >= pl_y && y <= pl_y+130) {
+//            if (x > pl_x + 10 && x < pl_x + 70) {
+//                Health = 0;
+//            }
+//        }
+        else for (int i = 0; i < (x + w)/40; ++i)
             if (TileMap[int(y/40)][i] == 'B') Health = 0;
         if (Health <= 0) {
             anim.set("explode");

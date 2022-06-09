@@ -11,19 +11,17 @@ public:
 
     HealthBar() {
         bar.setFillColor(Color(100,0,0));
-        max = 100;
+        max = 450;
+        bar.setSize(Vector2f(max/9, 10));
     }
 
     void update(int k) {
-        if (k > 0) if (k < max) bar.setSize(Vector2f(10, (max - k)*70/max));
+        if (k > 0) if (k < max) bar.setSize(Vector2f(k/9, 10));
     }
 
-    void draw(RenderWindow &window)
+    void draw(RenderWindow &window, float x, float y, float dir)
     {
-        Vector2f center = window.getView().getCenter();
-        Vector2f size = window.getView().getSize();
-
-        bar.setPosition( center.x - size.x/2 + 11, center.y - size.y/2 + 13);
+        bar.setPosition(x + dir * 50, y - 12);
         window.draw(bar);
     }
 };

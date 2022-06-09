@@ -26,7 +26,7 @@ public:
 
         life = true;
         timer = 0;
-        timer_end = 0;
+        timer_end = 200;
         dx = dy = 0;
     }
     virtual void update(float time) = 0;
