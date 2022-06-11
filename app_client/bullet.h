@@ -6,7 +6,7 @@
 class Bullet: public Entity {
 public:
     Bullet(AnimationManager &a, std::string map[], int x, int y, bool dir): Entity(a, x, y) {
-        option("Bullet", 0.6, 10, "move");
+        option("Bullet", 0.6, 1, "move");
         if (dir) dx = -0.6;
     }
 

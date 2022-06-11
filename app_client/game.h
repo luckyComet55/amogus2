@@ -16,7 +16,7 @@ void RunGame() {
     RenderWindow window(VideoMode(int(width), int(height)), "Sheesh");
 
     Texture character_t, bullet_t, bg, block1, block2;
-    character_t.loadFromFile("Biker22.png");
+    character_t.loadFromFile("ledy.png");
     bg.loadFromFile("bg.png");
     bullet_t.loadFromFile("bullet.png");
     block1.loadFromFile("block.png");
@@ -88,7 +88,7 @@ void RunGame() {
             Entity *b = *it;
             if (b->y >= player.y && b->y <= player.y+130) {
                 if (b->x > player.x + 10 && b->x < player.x + 70) {
-                    player.Health -= 1;
+                    player.Health -= b->Health;
                     std::cout << player.Health << std::endl;
                     b->Health = 0;
                 }
