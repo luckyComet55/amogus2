@@ -87,7 +87,7 @@ void RunGame() {
         for (it = entities.begin(); it != entities.end();) {
             Entity *b = *it;
             if (b->y >= player.y && b->y <= player.y+130) {
-                if (b->x > player.x + 10 && b->x < player.x + 70) {
+                if (b->x > player.x + 10 && b->x < player.x + 70 && b->Health > 0) {
                     player.Health -= b->Health;
                     std::cout << player.Health << std::endl;
                     b->Health = 0;
