@@ -11,12 +11,12 @@ public:
 
     HealthBar() {
         bar.setFillColor(Color(100,0,0));
-        max = 450;
-        bar.setSize(Vector2f(max/9, 10));
+        max = 100;
+        bar.setSize(Vector2f(max/2, 10));
     }
 
     void update(int k) {
-        if (k > 0) if (k < max) bar.setSize(Vector2f(k/9, 10));
+        if (k >= 0) if (k < max) bar.setSize(Vector2f(k/2, 10));
     }
 
     void draw(RenderWindow &window, float x, float y, float dir)

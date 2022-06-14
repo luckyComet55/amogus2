@@ -7,12 +7,12 @@ using namespace sf;
 
 class PLAYER: public Entity{
 public:
-    enum {stay, run, jump, kick, die} STATE;
+    enum {stay, run, jump, kick} STATE;
     bool shoot, hit;
     std::map<std::string, bool> key;
 
     PLAYER(AnimationManager &a, std::string map[], int x, int y): Entity(a, x ,y){
-        option("Player", 0, 450, "stay");
+        option("Player", 0, 100, "stay");
         STATE = stay; shoot = false;
     }
 
@@ -58,6 +58,7 @@ public:
         if (STATE==run) anim.set("run");
         if (STATE==jump) { anim.set("jump"); }
         if (STATE==kick) anim.set("kick");
+        if (!life) { anim.set("die"); }
 
         if (shoot) {timer+=time;
             if (timer>timer_end) {shoot=false; timer=0;}
@@ -71,9 +72,15 @@ public:
 
     void update(float time)
     {
-        Keyboard();
-        if (STATE == kick && anim.animList["kick"].currentFrame + 0.004*time < anim.animList["kick"].frames.size())
-            key["MR"] = true;
+        if (Health <= 0){
+            life = false;
+        }
+        if (life) {
+            Keyboard();
+            if (STATE == kick &&
+                anim.animList["kick"].currentFrame + 0.004 * time < anim.animList["kick"].frames.size())
+                key["MR"] = true;
+        }
         Animation(time);
         dy+=0.0005*time;
 

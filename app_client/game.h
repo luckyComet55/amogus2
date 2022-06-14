@@ -12,11 +12,11 @@
 #include "HealthBar.h"
 using namespace sf;
 
-void RunGame() {
-    RenderWindow window(VideoMode(int(width), int(height)), "Sheesh");
+void RunGame(RenderWindow &window, Texture &character_t) {
+    //RenderWindow window(VideoMode(int(width), int(height)), "Sheesh");
 
-    Texture character_t, bullet_t, bg, block1, block2;
-    character_t.loadFromFile("ledy.png");
+    Texture bullet_t, bg, block1, block2;
+    //character_t.loadFromFile("Biker22.png");
     bg.loadFromFile("bg.png");
     bullet_t.loadFromFile("bullet.png");
     block1.loadFromFile("block.png");
@@ -62,7 +62,7 @@ void RunGame() {
         {
             if (event.type == Event::Closed or Keyboard::isKeyPressed(Keyboard::Escape))
                 window.close();
-            if (event.type == Event::MouseButtonPressed && player.dy == 0)
+            if (player.life && event.type == Event::MouseButtonPressed && player.dy == 0)
                 if (event.key.code == Mouse::Left)
                     timer = 0;
             if (event.type == Event::KeyPressed)
@@ -86,10 +86,9 @@ void RunGame() {
 
         for (it = entities.begin(); it != entities.end();) {
             Entity *b = *it;
-            if (b->y >= player.y && b->y <= player.y+130) {
-                if (b->x > player.x + 10 && b->x < player.x + 70 && b->Health > 0) {
-                    player.Health -= b->Health;
-                    std::cout << player.Health << std::endl;
+            if (player.life && b->y >= player.y && b->y <= player.y+130) {
+                if (b->x > player.x + 10 && b->x < player.x + 70 && b->Health == 10) {
+                    if (b->Health == 10) player.Health -= 10;
                     b->Health = 0;
                 }
             }
