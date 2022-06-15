@@ -2,7 +2,11 @@
 #define APP_CONF_H
 
 #define SERVER_PORT 42361
-#define SERVER_IP "172.28.64.1"
+#define SERVER_IP "192.168.50.51"
 #define MAX_CLIENTS 1024
+#define MAX_TRANSMIT_LEN 1024
+#define MAX_RECEIVE_LEN 1024
+#define MAX_COMM_LEN 32
+#define MAX_REQ_LEN 128
 
 #endif //APP_CONF_H
