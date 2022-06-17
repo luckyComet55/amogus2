@@ -73,6 +73,7 @@ public:
     bool isPlaying() {return animList[currentAnim].isPlaying;}
     float getH() {return animList[currentAnim].frames[0].height;}
     float getW() {return animList[currentAnim].frames[0].width;}
+    int getCurrFrame() {return animList[currentAnim].currentFrame;}
 };
 
 

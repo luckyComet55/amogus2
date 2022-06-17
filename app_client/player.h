@@ -42,7 +42,6 @@ public:
         if (key["MR"]) {
             dx = 0;
             STATE = kick;
-            hit = true;
             anim.play("kick");
         }
 
@@ -84,6 +83,8 @@ public:
             if (STATE == kick &&
                 anim.animList["kick"].currentFrame + 0.004 * time < anim.animList["kick"].frames.size())
                 key["MR"] = true;
+            if (STATE == kick && anim.animList["kick"].currentFrame + 136 == anim.animList["kick"].frames.size())
+                hit = true;
         }
         Animation(time);
         dy+=0.0005*time;

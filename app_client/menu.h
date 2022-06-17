@@ -8,8 +8,8 @@
 
 using namespace sf;
 
-void GameOptions(RenderWindow &window, Texture &character_t, Music &music) {
-    int currentKey = 0, skin = 0;
+void GameOptions(RenderWindow &window, Texture &character_t1, Texture &character_t2, Music &music) {
+    int currentKey = 0, skin1 = 5, skin2 = 4;
     std::string skins[6] = {"punk.png", "alien.png", "ledy.png", "cyborg-1.png", "Biker2.png", "Biker.png"};
 
     Texture bg, frame_t, heads_t, musicbar_t;
@@ -27,9 +27,12 @@ void GameOptions(RenderWindow &window, Texture &character_t, Music &music) {
     musicbar.setTextureRect(IntRect(0,0,4*music.getVolume(), 40));
 
     heads_t.loadFromFile("heads.png");
-    Sprite heads(heads_t);
-    heads.setTextureRect(IntRect(0,0,80,80));
-    heads.setPosition(23*40,10*40);
+    Sprite heads1(heads_t);
+    heads1.setTextureRect(IntRect(0, 0, 80, 80));
+    heads1.setPosition(23 * 40, 10 * 40);
+    Sprite heads2(heads_t);
+    heads2.setTextureRect(IntRect(0, 0, 80, 80));
+    heads2.setPosition(23 * 40, 14 * 40);
 
     while (window.isOpen()) {
         Event event;
@@ -37,11 +40,11 @@ void GameOptions(RenderWindow &window, Texture &character_t, Music &music) {
             if (event.type == Event::KeyPressed) {
                 if (event.key.code == Keyboard::Down || event.key.code == Keyboard::S) {
                     currentKey += 1;
-                    if (currentKey > 2) currentKey = 0;
+                    if (currentKey > 3) currentKey = 0;
                 }
                 if (event.key.code == Keyboard::Up || event.key.code == Keyboard::W) {
                     currentKey -= 1;
-                    if (currentKey < 0) currentKey = 2;
+                    if (currentKey < 0) currentKey = 3;
                 }
                 if (currentKey == 0) {  //sound
                     if (event.key.code == Keyboard::Left || event.key.code == Keyboard::D) {
@@ -57,26 +60,39 @@ void GameOptions(RenderWindow &window, Texture &character_t, Music &music) {
                         else if (music.getStatus() == music.Paused) music.play();
                     }
                 }
-                if (currentKey == 1) {  // skin
+                if (currentKey == 1) {  // skin1
                     if (event.key.code == Keyboard::Left || event.key.code == Keyboard::D) {
-                        skin -= 1;
-                        if (skin < 0) skin = 5;
+                        skin1 -= 1;
+                        if (skin1 < 0) skin1 = 5;
                     }
                     if (event.key.code == Keyboard::Right || event.key.code == Keyboard::A) {
-                        skin += 1;
-                        if (skin > 5) skin = 0;
+                        skin1 += 1;
+                        if (skin1 > 5) skin1 = 0;
                     }
-                    character_t.loadFromFile(skins[skin]);
+                    character_t1.loadFromFile(skins[skin1]);
                 }
-                if (currentKey == 2 && event.key.code == Keyboard::Enter || event.key.code == Keyboard::Escape) return;
+                if (currentKey == 2) {  // skin2
+                    if (event.key.code == Keyboard::Left || event.key.code == Keyboard::D) {
+                        skin2 -= 1;
+                        if (skin2 < 0) skin2 = 5;
+                    }
+                    if (event.key.code == Keyboard::Right || event.key.code == Keyboard::A) {
+                        skin2 += 1;
+                        if (skin2 > 5) skin2 = 0;
+                    }
+                    character_t2.loadFromFile(skins[skin2]);
+                }
+                if (currentKey == 3 && event.key.code == Keyboard::Enter || event.key.code == Keyboard::Escape) return;
             }
         }
 
         View view( FloatRect(0, 0, 1920, 1000) );
         background.setPosition(view.getCenter());
         window.draw(background);
-        heads.setTextureRect(IntRect(0+80*skin,0,80,80));
-        window.draw(heads);
+        heads1.setTextureRect(IntRect(0 + 80 * skin1, 0, 80, 80));
+        window.draw(heads1);
+        heads2.setTextureRect(IntRect(0 + 80 * skin2, 0, 80, 80));
+        window.draw(heads2);
         musicbar.setTextureRect(IntRect(0,0,4*music.getVolume(), 40));
         window.draw(musicbar);
         frame.setPosition(18*40, 5*40+4*40*currentKey);
@@ -87,10 +103,11 @@ void GameOptions(RenderWindow &window, Texture &character_t, Music &music) {
 
 void Menu() {
     RenderWindow window(VideoMode(int(width), int(height)), "SheeshMenu");
-    Texture bg, frame_t, character_t;
+    Texture bg, frame_t, character_t1, character_t2;
     bg.loadFromFile("mainmenu.png");
 
-    character_t.loadFromFile("Biker.png");
+    character_t1.loadFromFile("Biker.png");
+    character_t2.loadFromFile("Biker2.png");
 
     Sprite background(bg);
     background.setOrigin(bg.getSize().x/2, bg.getSize().y/2);
@@ -130,9 +147,9 @@ void Menu() {
                     if (currentKey < 0) currentKey = 3;
                 }
                 if (event.key.code == Keyboard::Enter) {
-                    if (currentKey == 0) RunGame(window, character_t);
+                    if (currentKey == 0) RunGame(window, character_t1, character_t2);
                     //if (currentKey == 1) Registration();
-                    if (currentKey == 2) GameOptions(window, character_t, music);
+                    if (currentKey == 2) GameOptions(window, character_t1, character_t2, music);
                     if (currentKey == 3) window.close();
                 }
             }
