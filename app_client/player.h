@@ -10,10 +10,12 @@ public:
     enum {stay, run, jump, kick} STATE;
     bool shoot, hit;
     std::map<std::string, bool> key;
+    int ammo;
 
     PLAYER(AnimationManager &a, std::string map[], int x, int y): Entity(a, x ,y){
         option("Player", 0, 100, "stay");
         STATE = stay; shoot = false;
+        ammo = 10;
     }
 
     void Keyboard() {
@@ -75,6 +77,8 @@ public:
         if (Health <= 0){
             life = false;
         }
+        if (Health > 100) Health = 100;
+        if (ammo > 15) Health = 15;
         if (life) {
             Keyboard();
             if (STATE == kick &&
@@ -105,7 +109,5 @@ public:
             }
     }
 };
-
-
 
 #endif

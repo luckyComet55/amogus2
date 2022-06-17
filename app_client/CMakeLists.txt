@@ -3,7 +3,7 @@ project(amogus2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(amogus2 main.cpp player.h animations.h map.h entity.h game.h HealthBar.h bullet.h menu.h)
+add_executable(amogus2 main.cpp player.h animations.h map.h entity.h game.h HealthBar.h bullet.h menu.h loot.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR C:/SFML/lib/cmake/SFML)
